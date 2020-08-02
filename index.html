@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <style>
+        body{
+            background-color:whitesmoke;
+        }
+        .col-md-3{
+            border: 2px solid black;
+            min-height:300px;
+        }
+        .controls{
+            background-color: khaki;
+        }
+        .container{
+            margin-top:100px;
+        }
+        .start{
+            text-align: center;
+            margin-top: 15px;
+        }
+        .start_btn{
+            width: 50%;
+            padding: 5px;
+        }
+        .image{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <div class="container">
+            <h1 align="center">Rock-Paper-Scissors</h1>
+            <div class="row">
+                <div class="col-md-3 controls">
+                    <div class="heading">First Player Controller</div>
+                    <hr style="border: 1px solid red;">
+                    <div class="buttons">
+                        <input type="radio" value="rock" name="first_selection" v-model="first_selection">Rock<br>
+                        <input type="radio" value="paper" name="first_selection" v-model="first_selection">Paper<br>
+                        <input type="radio" value="scissors" name="first_selection" v-model="first_selection">Scissors
+                    </div>
+                </div>
+                <div class="col-md-3 field">
+                    <div class="heading">First Player</div>
+                    <hr style="border: 1px solid red;">
+                    <div v-html="changeFirst"></div>
+                </div>
+                <div class="col-md-3 field">
+                    <div class="heading">Second Player</div>
+                    <hr style="border: 1px solid red;">
+                    <div v-html="changeSecond"></div>
+
+                </div>
+                <div class="col-md-3 controls">
+                    <div class="heading">Second Player Controller</div>
+                    <hr style="border: 1px solid red;">
+                    <div class="buttons">
+                        <input type="radio" value="rock" name="second_selection" v-model="second_selection">Rock<br>
+                        <input type="radio" value="paper" name="second_selection" v-model="second_selection">Paper<br>
+                        <input type="radio" value="scissors" name="second_selection" v-model="second_selection">Scissors
+                    </div>
+                </div>
+            </div>
+            <div class="start">
+                <button class="btn btn-success start_btn" @click="start()">Start</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:".section",
+        data:{
+            first_selection : '',
+            second_selection : '',
+            first_img: '',
+            second_img:'',
+        },
+        methods:{
+            start(){
+                if(this.first_selection == "" || this.second_selection == ""){
+                    alert("Please Select Both");
+                }else{
+                    if(this.first_selection ==  this.second_selection){
+                        alert("Draw!!! Please Try Again!!!");
+                    }
+                    if(this.first_selection == "rock" && this.second_selection == "paper"){
+                        alert("Player Second Wins!!!");
+                    }
+                    if(this.first_selection == "rock" && this.second_selection == "scissors"){
+                        alert("Player First Wins!!!");
+                    }
+                    if(this.first_selection == "paper" && this.second_selection == "rock"){
+                        alert("Player First Wins!!!");
+                    }
+                    if(this.first_selection == "scissor" && this.second_selection == "paper"){
+                        alert("Player First Wins!!!");
+                    }
+                    if(this.first_selection == "paper" && this.second_selection == "scissors"){
+                        alert("Player Second Wins!!!");
+                    }
+                    if(this.first_selection == "scissors" && this.second_selection == "rock"){
+                        alert("Player Second Wins!!!");
+                    }
+                }
+            }
+        },
+        computed:{
+            changeFirst:function(){
+                if(this.first_selection != ""){
+                    return '<img class="image" src="images/'+this.first_selection+'.png"/>';
+                }  
+            },
+            changeSecond:function(){
+                if(this.second_selection != ""){
+                    return '<img class="image" src="images/'+this.second_selection+'.png"/>';
+                }  
+            }
+        }
+    }); 
+</script>
+</html>
